@@ -8,14 +8,12 @@
 </head>
 <body>
 
-  <%# ── NAVBAR ─────────────────────────────────────────────────────────────── %>
   <nav class="navbar">
     <div class="navbar-marca">
-      <span>⚙️ Robotic Minds</span>
+      <span>Robotic Minds</span>
       <small>Inventario</small>
     </div>
     <div class="navbar-usuario">
-      <%# Mostramos nombre y rol del usuario en sesión %>
       <span class="badge badge-<%= usuario.rol === 'administrador' ? 'admin' : 'operador' %>">
         <%= usuario.rol %>
       </span>
@@ -24,21 +22,18 @@
     </div>
   </nav>
 
-  <%# ── CONTENIDO PRINCIPAL ─────────────────────────────────────────────────── %>
   <main class="contenido">
 
-    <%# Mensaje flash (éxito / error) guardado en sesión tras una acción %>
     <% if (mensaje) { %>
       <div class="alerta alerta-<%= mensaje.tipo %>">
         <%= mensaje.texto %>
       </div>
     <% } %>
 
-    <%# ── SECCIÓN: ALERTAS DE BAJO STOCK ────────────────────────────────────── %>
     <% if (bajoStock.length > 0) { %>
       <section class="seccion">
         <h2 class="seccion-titulo alerta-titulo">
-          ⚠️ Alertas de Stock Bajo (<%= bajoStock.length %>)
+          Alertas de Stock Bajo (<%= bajoStock.length %>)
         </h2>
         <table class="tabla tabla-alertas">
           <thead>
@@ -57,7 +52,6 @@
                 <td><%= comp.categoria || '—' %></td>
                 <td class="cantidad-baja"><%= comp.cantidad %></td>
                 <td><%= comp.stock_minimo %></td>
-                <%# Calculamos en la vista cuántas unidades faltan %>
                 <td class="faltante"><%= comp.stock_minimo - comp.cantidad %></td>
               </tr>
             <% }) %>
@@ -66,11 +60,9 @@
       </section>
     <% } %>
 
-    <%# ── SECCIÓN: INVENTARIO COMPLETO ──────────────────────────────────────── %>
     <section class="seccion">
       <div class="seccion-cabecera">
         <h2 class="seccion-titulo">Inventario de Componentes</h2>
-        <%# Botón "Nuevo Componente" solo visible para administradores %>
         <% if (usuario.rol === 'administrador') { %>
           <a href="/componentes/nuevo" class="btn btn-primario">+ Nuevo Componente</a>
         <% } %>
@@ -89,7 +81,6 @@
               <th>Stock Mín.</th>
               <th>Precio Unit.</th>
               <th>Fecha Alta</th>
-              <%# Columna de acciones solo si es administrador %>
               <% if (usuario.rol === 'administrador') { %>
                 <th>Acciones</th>
               <% } %>
@@ -97,7 +88,6 @@
           </thead>
           <tbody>
             <% componentes.forEach(comp => { %>
-              <%# Resaltamos filas con stock bajo usando clase CSS especial %>
               <tr class="<%= comp.cantidad < comp.stock_minimo ? 'fila-alerta' : '' %>">
                 <td><%= comp.id %></td>
                 <td><%= comp.nombre %></td>
@@ -108,12 +98,9 @@
                 <td><%= comp.stock_minimo %></td>
                 <td>$<%= parseFloat(comp.precio_unitario).toFixed(2) %></td>
                 <td><%= new Date(comp.fecha_creacion).toLocaleDateString('es-MX') %></td>
-                <%# Botones editar/eliminar solo para administrador %>
                 <% if (usuario.rol === 'administrador') { %>
                   <td class="acciones">
-                    <a href="/componentes/<%= comp.id %>/editar" class="btn btn-secundario btn-sm">
-                      Editar
-                    </a>
+                    <a href="/componentes/<%= comp.id %>/editar" class="btn btn-secundario btn-sm">Editar</a>
                     <form
                       action="/componentes/<%= comp.id %>/eliminar"
                       method="POST"
@@ -131,10 +118,8 @@
       <% } %>
     </section>
 
-    <%# ── SECCIÓN: HISTORIAL DE MOVIMIENTOS — accesible para ambos roles ─────── %>
     <section class="seccion">
       <h2 class="seccion-titulo">Historial de Movimientos</h2>
-
       <% if (historial.length === 0) { %>
         <p class="sin-datos">No hay movimientos registrados todavía.</p>
       <% } else { %>

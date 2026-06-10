@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%# Título dinámico según si es creación o edición %>
   <title><%= accion === 'crear' ? 'Nuevo Componente' : 'Editar Componente' %> — Robotic Minds</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-  <%# NAVBAR igual al dashboard %>
   <nav class="navbar">
     <div class="navbar-marca">
-      <span>⚙️ Robotic Minds</span>
+      <span>Robotic Minds</span>
       <small>Inventario</small>
     </div>
     <div class="navbar-usuario">
@@ -26,32 +24,27 @@
 
   <main class="contenido">
 
-    <%# Breadcrumb para volver al dashboard %>
     <div class="breadcrumb">
       <a href="/dashboard">← Volver al Dashboard</a>
     </div>
 
     <section class="seccion seccion-formulario">
       <h2 class="seccion-titulo">
-        <%= accion === 'crear' ? '+ Nuevo Componente' : '✏️ Editar Componente' %>
+        <%= accion === 'crear' ? 'Nuevo Componente' : 'Editar Componente' %>
       </h2>
 
-      <%# Mensaje de error de validación si lo hay %>
       <% if (mensaje) { %>
         <div class="alerta alerta-<%= mensaje.tipo %>">
           <%= mensaje.texto %>
         </div>
       <% } %>
 
-      <%# La action del formulario apunta a la ruta correcta según la acción.
-          Usamos POST para ambas (crear y editar) porque HTML no soporta PUT/DELETE. %>
       <form
         action="/componentes/<%= accion === 'editar' ? componente.id + '/editar' : 'nuevo' %>"
         method="POST"
         class="formulario"
       >
 
-        <%# Nombre — campo obligatorio %>
         <div class="campo">
           <label for="nombre">Nombre del Componente <span class="requerido">*</span></label>
           <input
@@ -65,7 +58,6 @@
           >
         </div>
 
-        <%# Descripción — campo opcional %>
         <div class="campo">
           <label for="descripcion">Descripción</label>
           <textarea
@@ -77,7 +69,6 @@
           ><%= componente ? componente.descripcion : '' %></textarea>
         </div>
 
-        <%# Fila con dos columnas: categoría y precio %>
         <div class="fila-campos">
           <div class="campo">
             <label for="categoria">Categoría</label>
@@ -106,7 +97,6 @@
           </div>
         </div>
 
-        <%# Fila con dos columnas: cantidad actual y stock mínimo %>
         <div class="fila-campos">
           <div class="campo">
             <label for="cantidad">Cantidad en Existencia <span class="requerido">*</span></label>
@@ -121,7 +111,7 @@
           </div>
 
           <div class="campo">
-            <label for="stock_minimo">Stock Mínimo Requerido</label>
+            <label for="stock_minimo">Stock Mínimo</label>
             <input
               type="number"
               id="stock_minimo"
@@ -129,11 +119,10 @@
               value="<%= componente ? componente.stock_minimo : '5' %>"
               min="0"
             >
-            <small class="campo-ayuda">Se generará una alerta si la cantidad cae por debajo de este valor.</small>
+            <small class="campo-ayuda">Genera alerta si la cantidad cae por debajo de este valor.</small>
           </div>
         </div>
 
-        <%# Botones de acción %>
         <div class="acciones-form">
           <button type="submit" class="btn btn-primario">
             <%= accion === 'crear' ? 'Guardar Componente' : 'Actualizar Componente' %>
