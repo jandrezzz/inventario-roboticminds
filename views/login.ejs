@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robotic Minds — Iniciar Sesión</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-page">
+
+  <%# Contenedor centrado del formulario %>
+  <div class="login-container">
+
+    <%# Logo / encabezado de la empresa %>
+    <div class="login-header">
+      <h1>⚙️ Robotic Minds</h1>
+      <p>Sistema de Inventario</p>
+    </div>
+
+    <%# Mensaje de error o información (ej: sesión expirada, credenciales inválidas) %>
+    <% if (mensaje) { %>
+      <div class="alerta alerta-<%= mensaje.tipo %>">
+        <%= mensaje.texto %>
+      </div>
+    <% } %>
+
+    <%# Formulario de login — envía credenciales por POST %>
+    <form action="/login" method="POST" class="login-form">
+
+      <div class="campo">
+        <label for="email">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="admin@rm.com"
+          required
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="campo">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          required
+          autocomplete="current-password"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primario btn-bloque">
+        Iniciar Sesión
+      </button>
+
+    </form>
+
+    <p class="login-footer">
+      Usuarios de prueba: <code>admin@rm.com</code> / <code>operador@rm.com</code>
+    </p>
+
+  </div>
+
+</body>
+</html>

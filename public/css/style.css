@@ -1,0 +1,476 @@
+/* ============================================================
+   style.css — Estilos globales para Robotic Minds Inventario
+   Paleta: azul oscuro (#1a2b4a), blanco, rojo alerta (#e74c3c)
+   ============================================================ */
+
+/* ── RESET Y BASE ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 15px;
+  background-color: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── PÁGINA DE LOGIN ───────────────────────────────────────── */
+/* Fondo degradado y contenido centrado vertical/horizontal */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a2b4a 0%, #2563eb 100%);
+}
+
+.login-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.login-header h1 {
+  font-size: 1.9rem;
+  color: #1a2b4a;
+  margin-bottom: 0.3rem;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.login-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.login-footer code {
+  background: #f0f2f5;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+/* ── NAVBAR ────────────────────────────────────────────────── */
+.navbar {
+  background: #1a2b4a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-marca span {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.navbar-marca small {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: -2px;
+}
+
+.navbar-usuario {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.navbar-nombre {
+  font-size: 0.9rem;
+}
+
+/* ── BADGES DE ROL ─────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-admin {
+  background: #f59e0b;
+  color: #1a2b4a;
+}
+
+.badge-operador {
+  background: #3b82f6;
+  color: #fff;
+}
+
+/* ── CONTENIDO PRINCIPAL ───────────────────────────────────── */
+.contenido {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* ── SECCIONES ─────────────────────────────────────────────── */
+.seccion {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.seccion-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.seccion-titulo {
+  font-size: 1.15rem;
+  color: #1a2b4a;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+/* Título de alertas sin margen separado porque tiene cabecera propia */
+.seccion-cabecera .seccion-titulo {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* El título de alertas se vuelve rojo para mayor visibilidad */
+.alerta-titulo {
+  color: #e74c3c !important;
+}
+
+.breadcrumb {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.sin-datos {
+  color: #888;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+/* ── TABLAS ────────────────────────────────────────────────── */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabla thead {
+  background: #1a2b4a;
+  color: #fff;
+}
+
+.tabla th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.tabla td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+/* Hover sutil sobre cada fila */
+.tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* Filas que tienen stock bajo → fondo rojo muy suave */
+.fila-alerta {
+  background: #fff5f5 !important;
+}
+
+.fila-alerta:hover {
+  background: #ffe8e8 !important;
+}
+
+/* Número de cantidad en rojo cuando está bajo stock */
+.cantidad-baja {
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+/* Columna "faltante" en la tabla de alertas */
+.faltante {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* Tabla de alertas tiene borde izquierdo rojo para destacarla */
+.tabla-alertas {
+  border-left: 4px solid #e74c3c;
+}
+
+/* Tag de acción en el historial */
+.tag-accion {
+  background: #e2e8f0;
+  color: #334155;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ── MENSAJES / ALERTAS ────────────────────────────────────── */
+/* Base para todos los mensajes flash */
+.alerta {
+  padding: 0.85rem 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+}
+
+/* Mensaje de éxito — verde */
+.alerta-exito {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #22c55e;
+}
+
+/* Mensaje de error — rojo */
+.alerta-error {
+  background: #fff5f5;
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+/* ── BOTONES ───────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Botón principal — azul oscuro */
+.btn-primario {
+  background: #1a2b4a;
+  color: #fff;
+  border-color: #1a2b4a;
+}
+
+.btn-primario:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Botón secundario — gris */
+.btn-secundario {
+  background: #475569;
+  color: #fff;
+  border-color: #475569;
+}
+
+.btn-secundario:hover {
+  background: #334155;
+  border-color: #334155;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Botón peligro — rojo para eliminar */
+.btn-peligro {
+  background: #e74c3c;
+  color: #fff;
+  border-color: #e74c3c;
+}
+
+.btn-peligro:hover {
+  background: #c0392b;
+  border-color: #c0392b;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Botón outline — borde visible, sin relleno */
+.btn-outline {
+  background: transparent;
+  color: #94a3b8;
+  border-color: #94a3b8;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: #fff;
+  text-decoration: none;
+}
+
+/* Tamaño pequeño para botones dentro de tablas */
+.btn-sm {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+/* Botón que ocupa todo el ancho del contenedor */
+.btn-bloque {
+  width: 100%;
+  display: block;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+/* ── FORMULARIOS ───────────────────────────────────────────── */
+/* Sección de formulario con ancho máximo centrado */
+.seccion-formulario {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Fila que divide campos en dos columnas */
+.fila-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Campo individual: label + input/textarea */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Asterisco rojo en labels de campos obligatorios */
+.requerido {
+  color: #e74c3c;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fff;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Texto de ayuda bajo el input */
+.campo-ayuda {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* Fila de botones al pie del formulario */
+.acciones-form {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* Columna de acciones (editar/eliminar) en tablas */
+.acciones {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ── FOOTER ────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 1rem;
+}
+
+/* ── RESPONSIVE — pantallas pequeñas ──────────────────────── */
+@media (max-width: 640px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem;
+  }
+
+  /* En móvil las dos columnas del formulario se apilan */
+  .fila-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .contenido {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  /* La tabla puede hacer scroll horizontal en pantallas angostas */
+  .tabla {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

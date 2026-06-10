@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# Título dinámico según si es creación o edición %>
+  <title><%= accion === 'crear' ? 'Nuevo Componente' : 'Editar Componente' %> — Robotic Minds</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <%# NAVBAR igual al dashboard %>
+  <nav class="navbar">
+    <div class="navbar-marca">
+      <span>⚙️ Robotic Minds</span>
+      <small>Inventario</small>
+    </div>
+    <div class="navbar-usuario">
+      <span class="badge badge-<%= usuario.rol === 'administrador' ? 'admin' : 'operador' %>">
+        <%= usuario.rol %>
+      </span>
+      <span class="navbar-nombre"><%= usuario.nombre %></span>
+      <a href="/logout" class="btn btn-outline btn-sm">Cerrar Sesión</a>
+    </div>
+  </nav>
+
+  <main class="contenido">
+
+    <%# Breadcrumb para volver al dashboard %>
+    <div class="breadcrumb">
+      <a href="/dashboard">← Volver al Dashboard</a>
+    </div>
+
+    <section class="seccion seccion-formulario">
+      <h2 class="seccion-titulo">
+        <%= accion === 'crear' ? '+ Nuevo Componente' : '✏️ Editar Componente' %>
+      </h2>
+
+      <%# Mensaje de error de validación si lo hay %>
+      <% if (mensaje) { %>
+        <div class="alerta alerta-<%= mensaje.tipo %>">
+          <%= mensaje.texto %>
+        </div>
+      <% } %>
+
+      <%# La action del formulario apunta a la ruta correcta según la acción.
+          Usamos POST para ambas (crear y editar) porque HTML no soporta PUT/DELETE. %>
+      <form
+        action="/componentes/<%= accion === 'editar' ? componente.id + '/editar' : 'nuevo' %>"
+        method="POST"
+        class="formulario"
+      >
+
+        <%# Nombre — campo obligatorio %>
+        <div class="campo">
+          <label for="nombre">Nombre del Componente <span class="requerido">*</span></label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value="<%= componente ? componente.nombre : '' %>"
+            placeholder="ej. Resistencia 10kΩ"
+            required
+            maxlength="150"
+          >
+        </div>
+
+        <%# Descripción — campo opcional %>
+        <div class="campo">
+          <label for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            rows="3"
+            placeholder="Descripción técnica del componente..."
+            maxlength="500"
+          ><%= componente ? componente.descripcion : '' %></textarea>
+        </div>
+
+        <%# Fila con dos columnas: categoría y precio %>
+        <div class="fila-campos">
+          <div class="campo">
+            <label for="categoria">Categoría</label>
+            <input
+              type="text"
+              id="categoria"
+              name="categoria"
+              value="<%= componente ? componente.categoria : '' %>"
+              placeholder="ej. Resistencias, LEDs..."
+              maxlength="100"
+            >
+          </div>
+
+          <div class="campo">
+            <label for="precio_unitario">Precio Unitario ($) <span class="requerido">*</span></label>
+            <input
+              type="number"
+              id="precio_unitario"
+              name="precio_unitario"
+              value="<%= componente ? componente.precio_unitario : '' %>"
+              step="0.01"
+              min="0"
+              placeholder="0.00"
+              required
+            >
+          </div>
+        </div>
+
+        <%# Fila con dos columnas: cantidad actual y stock mínimo %>
+        <div class="fila-campos">
+          <div class="campo">
+            <label for="cantidad">Cantidad en Existencia <span class="requerido">*</span></label>
+            <input
+              type="number"
+              id="cantidad"
+              name="cantidad"
+              value="<%= componente ? componente.cantidad : '0' %>"
+              min="0"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="stock_minimo">Stock Mínimo Requerido</label>
+            <input
+              type="number"
+              id="stock_minimo"
+              name="stock_minimo"
+              value="<%= componente ? componente.stock_minimo : '5' %>"
+              min="0"
+            >
+            <small class="campo-ayuda">Se generará una alerta si la cantidad cae por debajo de este valor.</small>
+          </div>
+        </div>
+
+        <%# Botones de acción %>
+        <div class="acciones-form">
+          <button type="submit" class="btn btn-primario">
+            <%= accion === 'crear' ? 'Guardar Componente' : 'Actualizar Componente' %>
+          </button>
+          <a href="/dashboard" class="btn btn-outline">Cancelar</a>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Robotic Minds &copy; <%= new Date().getFullYear() %> — Sistema de Inventario</p>
+  </footer>
+
+</body>
+</html>
