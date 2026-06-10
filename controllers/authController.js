@@ -37,16 +37,16 @@ const AuthController = {
       }
 
       req.session.user = {
-        id:     usuario.id,
+        id: usuario.id,
         nombre: usuario.nombre,
-        email:  usuario.email,
-        rol:    usuario.rol
+        email: usuario.email,
+        rol: usuario.rol
       };
 
       res.redirect('/dashboard');
 
     } catch (err) {
-      console.error('[AuthController.doLogin]', err);
+      console.error('Error en login:', err);
       res.render('login', {
         mensaje: { tipo: 'error', texto: 'Error interno del servidor.' }
       });

@@ -22,7 +22,7 @@ const InventarioController = {
       });
 
     } catch (err) {
-      console.error('[InventarioController.showDashboard]', err);
+      console.error('Error al cargar dashboard:', err);
       res.render('dashboard', {
         usuario: req.session.user,
         componentes: [],
@@ -56,11 +56,11 @@ const InventarioController = {
       }
 
       await ComponenteModel.create({
-        nombre:          nombre.trim(),
-        descripcion:     descripcion || '',
-        categoria:       categoria || '',
-        cantidad:        parseInt(cantidad, 10) || 0,
-        stock_minimo:    parseInt(stock_minimo, 10) || 5,
+        nombre: nombre.trim(),
+        descripcion: descripcion || '',
+        categoria: categoria || '',
+        cantidad: parseInt(cantidad, 10) || 0,
+        stock_minimo: parseInt(stock_minimo, 10) || 5,
         precio_unitario: parseFloat(precio_unitario) || 0
       });
 
@@ -68,7 +68,7 @@ const InventarioController = {
       res.redirect('/dashboard');
 
     } catch (err) {
-      console.error('[InventarioController.createComponente]', err);
+      console.error('Error al crear componente:', err);
       res.render('componentes/form', {
         usuario: req.session.user,
         componente: req.body,
@@ -95,7 +95,7 @@ const InventarioController = {
       });
 
     } catch (err) {
-      console.error('[InventarioController.showFormEditar]', err);
+      console.error('Error al cargar formulario de edición:', err);
       req.session.mensaje = { tipo: 'error', texto: 'Error al cargar el componente.' };
       res.redirect('/dashboard');
     }
@@ -113,11 +113,11 @@ const InventarioController = {
       }
 
       await ComponenteModel.update(id, {
-        nombre:          nombre.trim(),
-        descripcion:     descripcion || '',
-        categoria:       categoria || '',
-        cantidad:        parseInt(cantidad, 10) || 0,
-        stock_minimo:    parseInt(stock_minimo, 10) || 5,
+        nombre: nombre.trim(),
+        descripcion: descripcion || '',
+        categoria: categoria || '',
+        cantidad: parseInt(cantidad, 10) || 0,
+        stock_minimo: parseInt(stock_minimo, 10) || 5,
         precio_unitario: parseFloat(precio_unitario) || 0
       });
 
@@ -125,7 +125,7 @@ const InventarioController = {
       res.redirect('/dashboard');
 
     } catch (err) {
-      console.error('[InventarioController.updateComponente]', err);
+      console.error('Error al actualizar componente:', err);
       req.session.mensaje = { tipo: 'error', texto: 'Error al actualizar el componente.' };
       res.redirect('/dashboard');
     }
@@ -147,7 +147,7 @@ const InventarioController = {
       res.redirect('/dashboard');
 
     } catch (err) {
-      console.error('[InventarioController.deleteComponente]', err);
+      console.error('Error al eliminar componente:', err);
       req.session.mensaje = { tipo: 'error', texto: 'Error al eliminar el componente.' };
       res.redirect('/dashboard');
     }
