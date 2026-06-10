@@ -61,8 +61,14 @@ a:hover {
   font-size: 0.95rem;
 }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 .login-footer {
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
   text-align: center;
   font-size: 0.8rem;
   color: #888;

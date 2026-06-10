@@ -8,23 +8,19 @@
 </head>
 <body class="login-page">
 
-  <%# Contenedor centrado del formulario %>
   <div class="login-container">
 
-    <%# Logo / encabezado de la empresa %>
     <div class="login-header">
-      <h1>⚙️ Robotic Minds</h1>
+      <h1>Robotic Minds</h1>
       <p>Sistema de Inventario</p>
     </div>
 
-    <%# Mensaje de error o información (ej: sesión expirada, credenciales inválidas) %>
     <% if (mensaje) { %>
       <div class="alerta alerta-<%= mensaje.tipo %>">
         <%= mensaje.texto %>
       </div>
     <% } %>
 
-    <%# Formulario de login — envía credenciales por POST %>
     <form action="/login" method="POST" class="login-form">
 
       <div class="campo">
